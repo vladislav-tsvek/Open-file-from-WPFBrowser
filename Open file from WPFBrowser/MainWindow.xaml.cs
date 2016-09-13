@@ -33,14 +33,14 @@ namespace Open_file_from_WPFBrowser
         {
             webView = new WPFBrowserView(BrowserFactory.Create(BrowserType.HEAVYWEIGHT));
             WPFWeb.Children.Add((UIElement)webView.GetComponent());
-
+            
             webView.Browser.LoadURL("http://www.google.com");
-
+            
             LightBrowser.Visibility = Visibility.Hidden;
             HeavyBrowser.Visibility = Visibility.Hidden;
             OpenFile.Visibility = Visibility.Visible;
             Status.Visibility = Visibility.Visible;
-            this.Title = "HeavyBrowser";
+            this.Title = "HeavyBrowser";            
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -61,6 +61,9 @@ namespace Open_file_from_WPFBrowser
             // Show the Dialog.
             Nullable<bool> result = openFileDialog.ShowDialog();
 
+           
+
+
             // Get the selected file name and display in a TextBox
             if (result == true)
             {
@@ -68,7 +71,9 @@ namespace Open_file_from_WPFBrowser
                 string filename = openFileDialog.FileName;
                 //Load Web page
                 webView.Browser.LoadURL(filename);
-                Status.Content = "Page loaded successfully!";
+                Status.Content = webView.Browser.URL.ToString();
+                //Status.Content = "Page loaded successfully!";
+
             }
             else
             {
