@@ -1,28 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DotNetBrowser;
+using DotNetBrowser.WPF;
+using Microsoft.Win32;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Open_file_from_WPFBrowser
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        BrowserView webView;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void LightBrowser_Click(object sender, RoutedEventArgs e)
+        {
+            webView = new WPFBrowserView(BrowserFactory.Create(BrowserType.LIGHTWEIGHT));
+            WPFWeb.Children.Add((UIElement)webView.GetComponent());
+
+            webView.Browser.LoadURL("http://www.google.com");
+
+            LightBrowser.Visibility = Visibility.Hidden;
+            HeavyBrowser.Visibility = Visibility.Hidden;
+            OpenFile.Visibility = Visibility.Visible;
+            Status.Visibility = Visibility.Visible;
+            this.Title = "LightBrowser";
+        }
+
+        private void HeavyBrowser_Click(object sender, RoutedEventArgs e)
+        {
+            webView = new WPFBrowserView(BrowserFactory.Create(BrowserType.HEAVYWEIGHT));
+            WPFWeb.Children.Add((UIElement)webView.GetComponent());
+
+            webView.Browser.LoadURL("http://www.google.com");
+
+            LightBrowser.Visibility = Visibility.Hidden;
+            HeavyBrowser.Visibility = Visibility.Hidden;
+            OpenFile.Visibility = Visibility.Visible;
+            Status.Visibility = Visibility.Visible;
+            this.Title = "HeavyBrowser";
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!webView.Browser.IsDisposed())
+            {
+                webView.Dispose();
+                webView.Browser.Dispose();
+            }
+        }
+
+        private void OpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = ".html";
+            openFileDialog.Filter = "HTML pages (.html)|*.html";
+
+            // Show the Dialog.
+            Nullable<bool> result = openFileDialog.ShowDialog();
+
+            // Get the selected file name and display in a TextBox
+            if (result == true)
+            {
+                // Open document
+                string filename = openFileDialog.FileName;
+                //Load Web page
+                webView.Browser.LoadURL(filename);
+                Status.Content = "Page loaded successfully!";
+            }
+            else
+            {
+                Status.Content = "Something gone wrong!";
+            }
         }
     }
 }
