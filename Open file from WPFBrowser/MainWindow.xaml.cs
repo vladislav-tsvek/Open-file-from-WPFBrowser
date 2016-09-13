@@ -71,8 +71,8 @@ namespace Open_file_from_WPFBrowser
                 string filename = openFileDialog.FileName;
                 //Load Web page
                 webView.Browser.LoadURL(filename);
-                Status.Content = webView.Browser.URL.ToString();
-                //Status.Content = "Page loaded successfully!";
+                //Status.Content = webView.Browser.URL.ToString();
+                Status.Content = "Page loaded successfully! Wait for upload libraries.";
 
             }
             else
