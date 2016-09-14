@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Open_file_from_WPFBrowser"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Closing="Window_Closing">
+        Title="MainWindow" Height="365.986" Width="775.721" Closing="Window_Closing">
     <Grid  x:Name="mainLayout">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="38*"/>
-            <ColumnDefinition Width="120*"/>
-            <ColumnDefinition Width="37*"/>
-            <ColumnDefinition Width="121*"/>
+            <ColumnDefinition Width="100*"/>
             <ColumnDefinition Width="38*"/>
-            <ColumnDefinition Width="120*"/>
-            <ColumnDefinition Width="43*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="38*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,6 +24,7 @@
         <Button x:Name="LightBrowser" HorizontalAlignment="Left" Grid.Row="0" Content="Light Browser" Width="120" Margin="0,7,0,0" Grid.Column="1" Click="LightBrowser_Click"/>
         <Button x:Name="HeavyBrowser" HorizontalAlignment="Left" Grid.Row="0" Height="23"  Content="Heavy Browser" VerticalAlignment="Top" Width="120" Margin="1,7,0,0" Grid.Column="3" Click="HeavyBrowser_Click"/>
         <Button x:Name="OpenFile" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="0" Height="23"  Content="Open File" VerticalAlignment="Top" Width="120" Margin="0,7,0,0" Grid.Column="5" Click="OpenFile_Click"/>
+        <Button x:Name="Features" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="0" Height="23"  Content="Advanced features" VerticalAlignment="Top" Width="120" Margin="0,7,0,0" Grid.Column="6" Click="Features_Click"/>
         <Label x:Name="Status" Grid.Row="0" HorizontalAlignment="Left" Grid.Column="1" Grid.ColumnSpan="7" Content="Please, choose the file to open" Visibility="Hidden"/>
         <Grid Grid.Row="1" Name="WPFWeb" Grid.ColumnSpan="7" />
 

@@ -25,6 +25,7 @@ namespace Open_file_from_WPFBrowser
             LightBrowser.Visibility = Visibility.Hidden;
             HeavyBrowser.Visibility = Visibility.Hidden;
             OpenFile.Visibility = Visibility.Visible;
+            Features.Visibility = Visibility.Visible;
             Status.Visibility = Visibility.Visible;
             this.Title = "LightBrowser";
         }
@@ -39,6 +40,7 @@ namespace Open_file_from_WPFBrowser
             LightBrowser.Visibility = Visibility.Hidden;
             HeavyBrowser.Visibility = Visibility.Hidden;
             OpenFile.Visibility = Visibility.Visible;
+            Features.Visibility = Visibility.Visible;
             Status.Visibility = Visibility.Visible;
             this.Title = "HeavyBrowser";            
         }
@@ -79,6 +81,12 @@ namespace Open_file_from_WPFBrowser
             {
                 Status.Content = "Something gone wrong!";
             }
+        }
+
+        private void Features_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 feature = new Window1();
+            feature.Show();
         }
     }
 }
