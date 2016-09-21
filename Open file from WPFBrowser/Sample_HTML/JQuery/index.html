@@ -147,7 +147,7 @@
 		</p>
 		<div id="slider-range-max" margin-top="20px"></div>
 		<div class="freePlace"/>
-		<button name="booking" id="book" onclick="clickOn()" >Book Now!</button>
+		<button name="booking" id="booking" onclick="clickOn()" >Book Now!</button>
 	</div>
 </fieldset>
 
@@ -180,9 +180,9 @@
   <option value="transfer">Transfer</option>
 </select>
  
-<button id="button" class="ui-state-default ui-corner-all">Run Effect</button>
+<button id="runEff" class="ui-state-default ui-corner-all">Run Effect</button>
   
-<button id="button1" class="ui-state-default ui-corner-all">Toggle Effect</button>
+<button id="toggleEff" class="ui-state-default ui-corner-all">Toggle Effect</button>
  
  <div class="freePlace">	</div>
 
@@ -235,7 +235,7 @@ $( function() {
       if ( selectedEffect === "scale" ) {
         options = { percent: 50 };
       } else if ( selectedEffect === "transfer" ) {
-        options = { to: "#button", className: "ui-effects-transfer" };
+        options = { to: "#runEff", className: "ui-effects-transfer" };
       } else if ( selectedEffect === "size" ) {
         options = { to: { width: 200, height: 60 } };
       }
@@ -252,7 +252,7 @@ $( function() {
     };
  
     // Set effect from select menu value
-    $( "#button" ).on( "click", function() {
+    $( "#runEff" ).on( "click", function() {
       runEffect();
       return false;
     });
@@ -260,7 +260,7 @@ $( function() {
 
 $( function  () {
     var state = true;
-    $( "#button1" ).on( "click", function() {
+    $( "#toggleEff" ).on( "click", function() {
       if ( state ) {
         $( "#effect" ).animate({
           backgroundColor: "#aa0000",

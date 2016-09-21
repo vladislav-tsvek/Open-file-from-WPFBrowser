@@ -55,6 +55,8 @@ namespace Open_file_from_WPFBrowser
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.DefaultExt = ".html";
             openFileDialog.Filter = "HTML pages (.html)|*.html";
+            openFileDialog.RestoreDirectory = true;
+
 
             // Show the Dialog.
             Nullable<bool> result = openFileDialog.ShowDialog();
@@ -126,10 +128,12 @@ namespace Open_file_from_WPFBrowser
             clickOnPage.Visibility = Visibility.Visible;
             checkBoxOn.Visibility = Visibility.Visible;
             textBox.Visibility = Visibility.Visible;
-            textBox.Text = "button";
+            textBox.Text = "runEff";
             tagId.Visibility = Visibility.Visible;
             Status.Visibility = Visibility.Visible;
             comboBox.Visibility = Visibility.Visible;
+            Instruction.Visibility = Visibility.Visible;
+            Instruction1.Visibility = Visibility.Visible;
         }
 
        
@@ -249,7 +253,7 @@ namespace Open_file_from_WPFBrowser
                 {
                     Console.WriteLine("{0}", e1);
                     Status.Visibility = Visibility.Visible;
-                    Status.Content = "No combobox elements!";
+                    Status.Content = "No combobox elements! Load jQuery HTML page.";
 
                 }
                 catch (ArgumentException e2)

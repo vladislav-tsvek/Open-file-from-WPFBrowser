@@ -6,17 +6,17 @@
         xmlns:local="clr-namespace:Open_file_from_WPFBrowser"
         xmlns:WPF="clr-namespace:DotNetBrowser.WPF;assembly=DotNetBrowser" x:Class="Open_file_from_WPFBrowser.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="365.986" Width="775.721" Closing="Window_Closing">
+        Title="MainWindow" Height="765.667" Width="1335.478" Closing="Window_Closing">
     <Grid  x:Name="mainLayout">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="57*"/>
-            <ColumnDefinition Width="149*"/>
-            <ColumnDefinition Width="56*"/>
-            <ColumnDefinition Width="150*"/>
-            <ColumnDefinition Width="57*"/>
-            <ColumnDefinition Width="149*"/>
-            <ColumnDefinition Width="82*"/>
-            <ColumnDefinition Width="68*"/>
+            <ColumnDefinition Width="135*"/>
+            <ColumnDefinition Width="129*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="165*"/>
+            <ColumnDefinition Width="78*"/>
+            <ColumnDefinition Width="129*"/>
+            <ColumnDefinition Width="95*"/>
+            <ColumnDefinition Width="79*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,25 +24,21 @@
             <RowDefinition Height="276*"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="LightBrowser" HorizontalAlignment="Left" Grid.Row="0" Content="Light Browser" Width="100" Margin="0,7,0,0" Grid.Column="1" Click="LightBrowser_Click"/>
-        <Button x:Name="HeavyBrowser" HorizontalAlignment="Left" Grid.Row="0" Height="23"  Content="Heavy Browser" VerticalAlignment="Top" Width="100" Margin="1,7,0,0" Grid.Column="3" Click="HeavyBrowser_Click"/>
-        <Button x:Name="OpenFile" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="0" Height="23"  Content="Open File" VerticalAlignment="Top" Width="100" Margin="0,7,0,0" Grid.Column="5" Click="OpenFile_Click"/>
-     
-        <Button x:Name="clickOnPage" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="0" Height="23"  Content="Click on page" VerticalAlignment="Top" Width="80" Margin="0,7,0,0" Grid.Column="6"  Click="clickOnPage_Click" />
-        <Button x:Name="checkBoxOn" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="0" Height="23"   Content="On/off flags" VerticalAlignment="Top" Width="80" Margin="0,7,0,0" Grid.Column="7" Click="checkBoxOn_Click" />
+        <Button x:Name="LightBrowser" HorizontalAlignment="Center" Grid.Row="0" Content="Light Browser" Width="100" Margin="0,7,0,0" Grid.Column="1" Click="LightBrowser_Click"/>
+        <Button x:Name="HeavyBrowser" HorizontalAlignment="Center" Grid.Row="0" Height="23"  Content="Heavy Browser" VerticalAlignment="Top" Width="100" Margin="1,7,0,0" Grid.Column="3" Click="HeavyBrowser_Click"/>
+        <Button x:Name="OpenFile" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="0" Height="23"  Content="Open HTML File" VerticalAlignment="Top" Width="100" Margin="0,7,0,0" Grid.Column="5" Click="OpenFile_Click"/>
 
-        <ComboBox x:Name="comboBox" Grid.Row="1" Grid.Column="6" SelectionChanged="comboBox_SelectionChanged" Visibility="Hidden" MouseMove="comboBox_MouseMove" />
+        <Label x:Name="Instruction1" Grid.Row="0"  Content="Select jQuery HTML page" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="2" Visibility="Hidden"/>
+        <Button x:Name="clickOnPage" HorizontalAlignment="Center" Visibility="Hidden" Grid.Row="0" Height="23"  Content="Emulate Click" VerticalAlignment="Top" Width="80" Margin="0,7,0,0" Grid.Column="6"  Click="clickOnPage_Click" />
+        <Button x:Name="checkBoxOn" HorizontalAlignment="Center" Visibility="Hidden" Grid.Row="0" Height="23"   Content="On/off flags" VerticalAlignment="Top" Width="80" Margin="0,7,-1,0" Grid.Column="7" Click="checkBoxOn_Click" />
 
-        <Label x:Name="Status" Grid.Row="1" HorizontalAlignment="Left" Grid.Column="3" Visibility="Hidden"/>
+        <ComboBox x:Name="comboBox" Grid.Row="1" Grid.Column="6" SelectionChanged="comboBox_SelectionChanged" Visibility="Hidden" MouseMove="comboBox_MouseMove" Height="25" />
+        <Label x:Name="Instruction" Grid.Row="1"  Content="Choose an effect and press 'Emulate Click'" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="4" Grid.ColumnSpan="2" Visibility="Hidden"/>
 
+        <Label x:Name="Status" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Column="2" Visibility="Hidden" FontWeight="Medium"/>
 
-
-
-        <TextBox x:Name="textBox" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
-        <Label x:Name="tagId" Grid.Row="0" HorizontalAlignment="Left" Grid.Column="0" Content="Enter button Id" Visibility="Hidden" />
-
-        
-
+        <TextBox x:Name="textBox" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
+        <Label x:Name="tagId" Grid.Row="0" HorizontalAlignment="Right" Grid.Column="0" Grid.ColumnSpan="2" Content="Enter button Id (for ex.: booking, runEff or toogleEff)" Visibility="Hidden" />
 
         <Grid Grid.Row="2" x:Name="WPFWeb" Grid.ColumnSpan="8"/>
 
