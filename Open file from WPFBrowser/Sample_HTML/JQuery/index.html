@@ -119,21 +119,9 @@
 	</style>
 </head>
 <body>
-	<div class="accordion">
-	<h3>Question One Sample Text</h3>
-	<p>Some text Sample.</p>
-	<h3>This is Question Two</h3>
-	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi malesuada, ante at feugiat tincidunt, enim massa gravida metus, commodo lacinia massa diam vel eros. Proin eget urna. Nunc fringilla neque vitae odio. Vivamus vitae ligula.</p>
-	<h3>Another Questio here</h3>
-	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi malesuada, ante at feugiat tincidunt, enim massa gravida metus, commodo lacinia massa diam vel eros. Proin eget urna. Nunc fringilla neque vitae odio. Vivamus vitae ligula.</p>
-	<h3>Sample heading</h3>
-	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi malesuada, ante at feugiat tincidunt, enim massa gravida metus, commodo lacinia massa diam vel eros. Proin eget urna. Nunc fringilla neque vitae odio. Vivamus vitae ligula.</p>
-	<h3>Sample Question Heading</h3>
-	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi malesuada, ante at feugiat tincidunt, enim massa gravida metus, commodo lacinia massa diam vel eros. Proin eget urna. Nunc fringilla neque vitae odio. Vivamus vitae ligula.</p>
-</div>
 
 <div class="freePlace">	</div>
-<fieldset>
+<fieldset name="field">
 	<legend>Booking meeting rooms</legend>
 	<div >
 		<select id="room-type">
@@ -150,16 +138,20 @@
 		<label for="meetingType-conference">Conference</label>
 		<input type="radio" name="meetingType" id="meetingType-conference">
 		<label for="video">With video</label>
-		<input type="checkbox" name="video" id="video">		
+		<input type="checkbox" name="video" id="video">
+		<label for="conditioner">With conditioner</label>
+		<input type="checkbox" name="conditioner" id="conditioner">		
 		<p>
 		  <label for="amount">Quantity of participants:</label>
 		  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 		</p>
 		<div id="slider-range-max" margin-top="20px"></div>
 		<div class="freePlace"/>
-		<button name="booking" onclick="clickOn()" >Book Now!</button>
+		<button name="booking" id="book" onclick="clickOn()" >Book Now!</button>
 	</div>
 </fieldset>
+
+<div class="freePlace">	</div>
 
 <div class="toggler">
   <div id="effect" class="ui-widget-content ui-corner-all">
@@ -192,6 +184,8 @@
   
 <button id="button1" class="ui-state-default ui-corner-all">Toggle Effect</button>
  
+ <div class="freePlace">	</div>
+
 
 <script>
 
@@ -207,7 +201,6 @@ $( function() {
     });
     $( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
   } );
-
 
 
 function  clickOn(){

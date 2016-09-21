@@ -1,14 +1,22 @@
 ﻿using DotNetBrowser;
 using DotNetBrowser.WPF;
+using DotNetBrowser.DOM;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Windows;
+using DotNetBrowser.Events;
+using System.Threading;
+using System.Windows.Input;
 
 namespace Open_file_from_WPFBrowser
 {
     public partial class MainWindow : Window
     {
-        BrowserView webView;
+        public BrowserView webView;
+
+        DOMDocument objDocument;
+        DOMElement flag;
 
         public MainWindow()
         {
@@ -18,31 +26,19 @@ namespace Open_file_from_WPFBrowser
         private void LightBrowser_Click(object sender, RoutedEventArgs e)
         {
             webView = new WPFBrowserView(BrowserFactory.Create(BrowserType.LIGHTWEIGHT));
-            WPFWeb.Children.Add((UIElement)webView.GetComponent());
 
-            webView.Browser.LoadURL("http://www.google.com");
+            controlsVisibility();
 
-            LightBrowser.Visibility = Visibility.Hidden;
-            HeavyBrowser.Visibility = Visibility.Hidden;
-            OpenFile.Visibility = Visibility.Visible;
-            Features.Visibility = Visibility.Visible;
-            Status.Visibility = Visibility.Visible;
             this.Title = "LightBrowser";
         }
 
         private void HeavyBrowser_Click(object sender, RoutedEventArgs e)
         {
             webView = new WPFBrowserView(BrowserFactory.Create(BrowserType.HEAVYWEIGHT));
-            WPFWeb.Children.Add((UIElement)webView.GetComponent());
-            
-            webView.Browser.LoadURL("http://www.google.com");
-            
-            LightBrowser.Visibility = Visibility.Hidden;
-            HeavyBrowser.Visibility = Visibility.Hidden;
-            OpenFile.Visibility = Visibility.Visible;
-            Features.Visibility = Visibility.Visible;
-            Status.Visibility = Visibility.Visible;
-            this.Title = "HeavyBrowser";            
+
+            controlsVisibility();
+
+            this.Title = "HeavyBrowser";
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -62,10 +58,7 @@ namespace Open_file_from_WPFBrowser
 
             // Show the Dialog.
             Nullable<bool> result = openFileDialog.ShowDialog();
-
-           
-
-
+            
             // Get the selected file name and display in a TextBox
             if (result == true)
             {
@@ -74,19 +67,202 @@ namespace Open_file_from_WPFBrowser
                 //Load Web page
                 webView.Browser.LoadURL(filename);
                 //Status.Content = webView.Browser.URL.ToString();
+                Status.Visibility = Visibility.Visible;
                 Status.Content = "Page loaded successfully! Wait for upload libraries.";
 
             }
             else
             {
+                Status.Visibility = Visibility.Visible;
                 Status.Content = "Something gone wrong!";
             }
         }
 
-        private void Features_Click(object sender, RoutedEventArgs e)
+        
+        private void clickOnPage_Click(object sender, RoutedEventArgs e)
         {
-            Window1 feature = new Window1();
-            feature.Show();
+            objDocument = webView.Browser.GetDocument();
+
+            try
+            {
+                flag = objDocument.GetElementById(textBox.Text.ToString());
+            }
+            catch (NullReferenceException e1)
+            {
+                Console.WriteLine("{0}", e1);
+                Status.Visibility = Visibility.Visible;
+                Status.Content = "No button elements!";
+
+            }
+            catch (ArgumentException e2)
+            {
+                Console.WriteLine("{0}", e2);
+            }
+
+            if (flag != null)
+            {
+                
+                flag.Click();
+                Status.Content = "";
+            }
+
+            else
+            {
+                Status.Visibility = Visibility.Visible;
+                Status.Content = "No element with this ID";
+            }
+        }
+
+        
+        void controlsVisibility()
+        {
+            WPFWeb.Children.Add((UIElement)webView.GetComponent());
+
+            webView.Browser.LoadURL("teamdev.com");
+
+            LightBrowser.Visibility = Visibility.Hidden;
+            HeavyBrowser.Visibility = Visibility.Hidden;
+            OpenFile.Visibility = Visibility.Visible;
+            clickOnPage.Visibility = Visibility.Visible;
+            checkBoxOn.Visibility = Visibility.Visible;
+            textBox.Visibility = Visibility.Visible;
+            textBox.Text = "button";
+            tagId.Visibility = Visibility.Visible;
+            Status.Visibility = Visibility.Visible;
+            comboBox.Visibility = Visibility.Visible;
+        }
+
+       
+        private void checkBoxOn_Click(object sender, RoutedEventArgs e)
+        {
+            objDocument = webView.Browser.GetDocument();
+            List<DOMNode> flags = null;
+
+            try
+            {
+                flags = objDocument.GetElementsByTagName("input");
+            }
+            catch (NullReferenceException e1)
+            {
+                Console.WriteLine("{0}", e1);
+                Status.Visibility = Visibility.Visible;
+                Status.Content = "No checkbox elements!";
+
+            }
+            catch (ArgumentException e2)
+            {
+                Console.WriteLine("{0}", e2);
+            }
+
+            if (flags != null)
+            {
+                foreach (var item in flags)
+                {
+
+                    DOMElement tmp = (DOMElement)item;
+
+                    if (tmp.GetAttribute("type").ToString() == "checkbox")
+                    {
+                        item.Click();
+
+                    }
+
+                }
+
+                Status.Content = "";
+            }
+
+            else
+            {
+                Status.Visibility = Visibility.Visible;
+                Status.Content = "No checkbox for flag";
+            }
+        }
+
+        private void comboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            objDocument = webView.Browser.GetDocument();
+
+            DOMNode list = null;
+
+            try
+            {
+                list = objDocument.GetElementById("effectTypes");
+            }
+            catch (NullReferenceException e1)
+            {
+                Console.WriteLine("{0}", e1);
+                Status.Visibility = Visibility.Visible;
+                Status.Content = "No checkbox elements!";
+
+            }
+            catch (ArgumentException e2)
+            {
+                Console.WriteLine("{0}", e2);
+            }
+
+            List<DOMNode> optns = list.GetElementsByTagName("option");
+            if (comboBox.Items.Count == optns.Count)
+            {
+                for (int i = 0; i < optns.Count; i++)
+                {
+                    Status.Content = "";
+                    if (comboBox.SelectedItem.ToString() == optns[i].TextContent)
+                    {
+                        DOMElement tmp = (DOMElement)optns[i];
+                        tmp.SetAttribute("selected", "selected");
+                        tmp.Click();
+                        break;
+                    }
+                    else
+                    {
+                        DOMElement tmp = (DOMElement)optns[i];
+                        if (tmp.SetAttribute("selected", "selected"))
+                        {
+                            tmp.RemoveAttribute("selected");
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private void comboBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (comboBox.Items.Count == 0)
+            {
+
+                objDocument = webView.Browser.GetDocument();
+
+                DOMNode list = null;
+                List<DOMNode> optns = null;
+
+                try
+                {
+                    list = objDocument.GetElementById("effectTypes");
+                    optns = list.GetElementsByTagName("option");
+                }
+                catch (NullReferenceException e1)
+                {
+                    Console.WriteLine("{0}", e1);
+                    Status.Visibility = Visibility.Visible;
+                    Status.Content = "No combobox elements!";
+
+                }
+                catch (ArgumentException e2)
+                {
+                    Console.WriteLine("{0}", e2);
+                }
+                if (optns != null)
+                {
+                    foreach (var item in optns)
+                    {
+                        comboBox.Items.Add(item.TextContent);
+                        Status.Visibility = Visibility.Visible;
+                        Status.Content = "Elements loaded!";
+                    }
+                }
+            }
         }
     }
 }
