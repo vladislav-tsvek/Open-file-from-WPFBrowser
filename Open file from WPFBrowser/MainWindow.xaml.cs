@@ -207,14 +207,7 @@ namespace Open_file_from_WPFBrowser
                 for (int i = 0; i < optns.Count; i++)
                 {
                     Status.Content = "";
-                    if (comboBox.SelectedItem.ToString() == optns[i].TextContent)
-                    {
-                        DOMElement tmp = (DOMElement)optns[i];
-                        tmp.SetAttribute("selected", "selected");
-                        tmp.Click();
-                        break;
-                    }
-                    else
+                    if (comboBox.SelectedItem.ToString() != optns[i].TextContent)
                     {
                         DOMElement tmp = (DOMElement)optns[i];
                         if (tmp.SetAttribute("selected", "selected"))
@@ -222,6 +215,16 @@ namespace Open_file_from_WPFBrowser
                             tmp.RemoveAttribute("selected");
                         }
                     }
+
+
+                       else if (comboBox.SelectedItem.ToString() == optns[i].TextContent)
+                    {
+                        DOMElement tmp = (DOMElement)optns[i];
+                        tmp.SetAttribute("selected", "selected");
+                        //tmp.Click();
+                        break;
+                    }
+                   
 
                 }
             }
